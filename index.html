@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations Angel! 🎓</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --wine-red: #722F37;
+            --gold: #D4AF37;
+        }
+
+        body {
+            margin: 0;
+            background: #fffafa;
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* Running Text (The Marquee) */
+        .marquee {
+            background: var(--wine-red);
+            color: white;
+            padding: 10px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* Floating Flowers */
+        .flower {
+            position: fixed;
+            top: -50px;
+            z-index: 999;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Animated Image Rotation */
+        .gallery-container {
+            margin: 50px auto;
+            width: 300px;
+            height: 400px;
+            perspective: 1000px;
+        }
+
+        .gallery {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateGallery 20s infinite linear;
+        }
+
+        .gallery div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #eee;
+        }
+
+        /* 4-Image Rotation Logic */
+        .gallery div:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
+        .gallery div:nth-child(2) { transform: rotateY(90deg) translateZ(200px); }
+        .gallery div:nth-child(3) { transform: rotateY(180deg) translateZ(200px); }
+        .gallery div:nth-child(4) { transform: rotateY(270deg) translateZ(200px); }
+
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes rotateGallery {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        /* Content Styles */
+        .main-content {
+            padding: 40px 20px;
+        }
+
+        h1 {
+            color: var(--wine-red);
+            font-size: 3rem;
+            margin-bottom: 0;
+            animation: pulse 2s infinite;
+        }
+
+        .grad-cap { font-size: 4rem; }
+
+        .personal-message {
+            max-width: 600px;
+            margin: 30px auto;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(114, 47, 55, 0.1);
+            border-left: 5px solid var(--wine-red);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        button {
+            background: var(--wine-red);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover { background: #5a242b; transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+
+    <div class="marquee">
+        <span>CONGRATULATIONS ANGEL — SO PROUD OF YOU — THE BEST IS YET TO COME — CONGRATULATIONS ANGEL — </span>
+    </div>
+
+    <div class="main-content">
+        <div class="grad-cap">🎓</div>
+        <h1>ANGEL</h1>
+        <p style="color: var(--gold); font-weight: bold; font-size: 1.5rem;">YOU DID IT!</p>
+
+        <div class="gallery-container">
+            <div class="gallery">
+                <div><img src="1.png" alt="Angel 1"></div>
+                <div><img src="2.png" alt="Angel 2"></div>
+                <div><img src="3.png" alt="Angel 3"></div>
+                <div><img src="4.jpeg" alt="Angel 4"></div>
+            </div>
+        </div>
+
+        <div class="personal-message">
+            <p>Babe, seeing you reach this milestone is everything. You've worked so hard, and today, the world gets to see what I already know: you are a star.</p>
+            <p style="margin-top:15px">Celebrate big with Mum and the family!</p>
+        </div>
+
+        <button onclick="celebrate()">Click for a Surprise 🥳</button>
+    </div>
+
+    <script>
+        // Confetti Logic
+        function celebrate() {
+            var duration = 5 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 7,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#722F37', '#D4AF37', '#ffffff']
+                });
+                confetti({
+                    particleCount: 7,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#722F37', '#D4AF37', '#ffffff']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // Flower Fall Logic
+        function createFlower() {
+            const flowers = ['🌸', '🌺', '🌹', '🌷', '🌼'];
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animationDuration = Math.random() * 2 + 3 + 's';
+            flower.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 5000);
+        }
+
+        setInterval(createFlower, 300);
+        
+        // Auto-run celebration on load
+        window.onload = celebrate;
+    </script>
+</body>
+</html>
