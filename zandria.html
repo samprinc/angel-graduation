@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>👑 Queen of Code | Tech Graduation 👑</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* * ULTRA-PREMIUM COLOR PALETTE 
+         * Deep Obsidian, Wine Red, and Cyber Gold
+         */
+        :root {
+            --obsidian: #09050c;
+            --wine-red: #722F37;
+            --wine-glow: #9e3643;
+            --cyber-gold: #D4AF37;
+            --pearl-white: #fdfbfb;
+            --glass-bg: rgba(20, 10, 25, 0.6);
+            --glass-border: rgba(212, 175, 55, 0.3);
+        }
+
+        body {
+            background-color: var(--obsidian);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(114, 47, 55, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(212, 175, 55, 0.15) 0%, transparent 50%);
+            font-family: 'Playfair Display', serif;
+            color: var(--pearl-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Tech Grid */
+        .tech-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            animation: gridFlow 15s linear infinite;
+        }
+
+        @keyframes gridFlow {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 40px; }
+        }
+
+        /* Sleek Tech Marquee */
+        .marquee-container {
+            background: rgba(9, 5, 12, 0.8);
+            border-bottom: 1px solid var(--wine-red);
+            padding: 10px 0;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--cyber-gold);
+            letter-spacing: 2px;
+        }
+
+        .marquee-content span {
+            margin: 0 40px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Main Royal Container */
+        .royal-container {
+            padding: 100px 20px 50px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .crown-icon {
+            font-size: 3.5rem;
+            margin-bottom: -15px;
+            filter: drop-shadow(0 0 10px var(--cyber-gold));
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(180deg, #fff 0%, var(--cyber-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            margin: 10px 0;
+            text-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .tech-badge {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            background: rgba(114, 47, 55, 0.3);
+            border: 1px solid var(--wine-red);
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--pearl-white);
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(114, 47, 55, 0.4);
+            margin-bottom: 50px;
+        }
+
+        /* * MAJESTIC 3D CAROUSEL 
+         * Replaces the chaotic GSAP motion paths with elegant engineered math
+         */
+        .scene {
+            width: 100%;
+            height: 350px;
+            perspective: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .carousel {
+            width: 200px;
+            height: 280px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spinCarousel 25s infinite linear;
+        }
+
+        .carousel-cell {
+            position: absolute;
+            width: 200px;
+            height: 280px;
+            left: 10px;
+            top: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--cyber-gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 15px rgba(212, 175, 55, 0.4);
+            /* Reflection effect */
+            -webkit-box-reflect: below 15px linear-gradient(transparent, transparent, rgba(0,0,0,0.4));
+        }
+
+        .carousel-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(110%);
+            transition: 0.5s;
+        }
+
+        .carousel-cell:hover img {
+            filter: grayscale(0%) contrast(120%);
+        }
+
+        /* Math for 8 items: 360 / 8 = 45deg apart, pushed out by 280px */
+        .carousel-cell:nth-child(1) { transform: rotateY(0deg) translateZ(280px); }
+        .carousel-cell:nth-child(2) { transform: rotateY(45deg) translateZ(280px); }
+        .carousel-cell:nth-child(3) { transform: rotateY(90deg) translateZ(280px); }
+        .carousel-cell:nth-child(4) { transform: rotateY(135deg) translateZ(280px); }
+        .carousel-cell:nth-child(5) { transform: rotateY(180deg) translateZ(280px); }
+        .carousel-cell:nth-child(6) { transform: rotateY(225deg) translateZ(280px); }
+        .carousel-cell:nth-child(7) { transform: rotateY(270deg) translateZ(280px); }
+        .carousel-cell:nth-child(8) { transform: rotateY(315deg) translateZ(280px); }
+
+        @keyframes spinCarousel {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        /* Elegant Glassmorphism Message */
+        .glass-card {
+            max-width: 750px;
+            margin: 0 auto 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px 50px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 20px rgba(255,255,255,0.05);
+            position: relative;
+        }
+
+        /* Decorative corner accents */
+        .glass-card::before, .glass-card::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--cyber-gold);
+        }
+        .glass-card::before { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+        .glass-card::after { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+        .glass-card p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #ececec;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: var(--cyber-gold);
+            font-style: italic;
+        }
+
+        .signature {
+            font-family: 'Space Mono', monospace;
+            color: var(--wine-red);
+            font-size: 1rem;
+            text-align: right;
+            margin-top: 30px;
+            letter-spacing: 1px;
+        }
+
+        /* Power Button */
+        .action-btn {
+            background: linear-gradient(135deg, var(--wine-red) 0%, #4a1520 100%);
+            border: 1px solid var(--cyber-gold);
+            color: var(--pearl-white);
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            padding: 18px 45px;
+            border-radius: 4px;
+            cursor: pointer;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(114, 47, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, #8a3a44 0%, var(--wine-red) 100%);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .scene { transform: scale(0.8); margin-bottom: 20px; }
+            .glass-card { padding: 30px 20px; margin: 0 15px 40px; }
+            .glass-card p { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>// SYSTEM.LOG: QUEEN_OF_CODE_INITIALIZED</span>
+            <span>✦ TECH BOOTCAMP GRADUATE ✦</span>
+            <span>// EXECUTE: FULL_STACK_MASTERY</span>
+            <span>✦ MY LOVE, MY PEACE ✦</span>
+            <span>// SYSTEM.LOG: QUEEN_OF_CODE_INITIALIZED</span>
+            <span>✦ TECH BOOTCAMP GRADUATE ✦</span>
+            <span>// EXECUTE: FULL_STACK_MASTERY</span>
+            <span>✦ MY LOVE, MY PEACE ✦</span>
+        </div>
+    </div>
+
+    <div class="tech-grid"></div>
+
+    <div class="royal-container">
+        <div class="crown-icon gs-reveal">👑</div>
+        <h1 class="gs-reveal">ANGEL</h1>
+        <div class="tech-badge gs-reveal">&lt; SOFTWARE ENGINEER /&gt;</div>
+
+        <div class="scene gs-reveal">
+            <div class="carousel">
+                <div class="carousel-cell"><img src="1.png" alt="Angel"></div>
+                <div class="carousel-cell"><img src="2.png" alt="Angel"></div>
+                <div class="carousel-cell"><img src="3.png" alt="Angel"></div>
+                <div class="carousel-cell"><img src="4.jpeg" alt="Angel"></div>
+                <div class="carousel-cell"><img src="1.png" alt="Angel"></div>
+                <div class="carousel-cell"><img src="2.png" alt="Angel"></div>
+                <div class="carousel-cell"><img src="3.png" alt="Angel"></div>
+                <div class="carousel-cell"><img src="4.jpeg" alt="Angel"></div>
+            </div>
+        </div>
+
+        <div class="glass-card gs-reveal">
+            <p>My Queen, My Angel,</p>
+            <p>From writing your first lines of code to building entire digital ecosystems, you conquered this bootcamp with absolute grace and undeniable fire.</p>
+            <p>You’ve transformed logic into poetry and complex algorithms into art. Today, the tech world gains a powerhouse, and my heart swells with pride. <span class="highlight">You are the most elegant power in my life.</span></p>
+            <p>Here is to your brilliant future. The world isn't ready for the systems you are going to build.</p>
+            <div class="signature">
+                // forever your shield, your fan, your peace <br>
+                > Sam
+            </div>
+        </div>
+
+        <button class="action-btn gs-reveal" onclick="deployCelebration()">Initialize Celebration</button>
+    </div>
+
+    <script>
+        // GSAP Reveal Animations on Load
+        window.onload = () => {
+            gsap.from(".gs-reveal", {
+                y: 40,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+        };
+
+        // Premium Celebration Function (Wine Red & Gold Confetti)
+        function deployCelebration() {
+            const duration = 4000;
+            const end = Date.now() + duration;
+            // The Premium Palette
+            const colors = ['#D4AF37', '#722F37', '#ffffff', '#09050c'];
+
+            (function frame() {
+                // Left Cannon
+                confetti({
+                    particleCount: 6,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                // Right Cannon
+                confetti({
+                    particleCount: 6,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+
+            // Flash effect to simulate a system "power up"
+            const flash = document.createElement('div');
+            flash.style.position = 'fixed';
+            flash.style.inset = '0';
+            flash.style.backgroundColor = 'rgba(212, 175, 55, 0.2)';
+            flash.style.zIndex = '9999';
+            flash.style.pointerEvents = 'none';
+            document.body.appendChild(flash);
+            
+            gsap.to(flash, {
+                opacity: 0,
+                duration: 0.5,
+                onComplete: () => flash.remove()
+            });
+        }
+    </script>
+</body>
+</html>
